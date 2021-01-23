@@ -7,7 +7,6 @@ const Card = (props) => {
             <Box as="button" w="100%" h="10" borderWidth="2px" borderColor={props.color}>
                 {props.word}
             </Box>
-            {/* <p>{props.id} - {props.word} - {props.color}</p> */}
         </div>
     );
 }

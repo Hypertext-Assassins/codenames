@@ -8,7 +8,7 @@ const Game = () => {
     const [words, setWords] = useState([]);
 
     const generateWords = async () => {
-        const words = await wordsAPI.shuffleBoard();
+        const words = await wordsAPI.generateBoard();
         setWords(words);
     }
 
