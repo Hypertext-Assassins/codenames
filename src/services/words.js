@@ -51,30 +51,49 @@ const wordsDB = [
     "education",
 ]
 
+// initialize arr of objs with word and count
+let wordsDBCount = [];
+
+//create arr of objs with {word: "baseball", count: 1} to avoid repeats
+const resetWordsDB = () => {
+    let wordsDBCount = [];
+    wordsDB.forEach((el) => {
+        wordsDBCount.push({  
+            word: el,
+            count: 1
+        })
+    })
+    return wordsDBCount;
+}
+
 const getCards = (color, number) => {
     let cardsArr = []
-    for (let i=0; i<number; i++){
-        let wordNum = Math.floor(Math.random()* wordsDB.length);
-        let card = {
-            id: Number,
-            word: wordsDB[wordNum],
-            color: color
+    while (cardsArr.length<number){
+        let rndIdx = Math.floor(Math.random()* wordsDBCount.length);
+        let wordObj = wordsDBCount[rndIdx]
+        if (wordObj.count>0){
+            let card = {
+                id: Number,
+                word: wordsDB[rndIdx],
+                color: color
+            }
+            wordObj.count--; //subtract count to avoid repeat words
+            cardsArr.push(card);
         }
-        wordsDB.splice(wordNum,1)  //to avoid repeat cards, remove word from wordsDB arrary
-        cardsArr.push(card);
     }
     return cardsArr;
 }
 
-
-export const shuffleBoard = () => {
+const buildBoard = () => {
     let redCards = getCards("red.500", 8)
-    let blueCards = getCards("blue.400", 9)
+    let blueCards = getCards("blue.400", 9) // 9 blue cards means blue must always go first
     let whiteCards = getCards("white", 7)
     let blackCard = getCards("black", 1)
     let boardArr = [...redCards, ...blueCards, ...whiteCards, ...blackCard]
+    return boardArr;
+}
 
-    //shuffle board
+const shuffleBoard = (boardArr) => {
     for (let i=boardArr.length-1; i>0; i--){
         let rndIdx = Math.floor(Math.random()*(i+1));
         let temp = boardArr[i];
@@ -87,4 +106,13 @@ export const shuffleBoard = () => {
     }
     return boardArr;
 }
+
+// generateBoard function is the only function exported. It's the culmination of all functions on words.js
+export const generateBoard = () => {
+    wordsDBCount = resetWordsDB();
+    let boardArr = buildBoard();
+    return shuffleBoard(boardArr);
+}
+
+
 
