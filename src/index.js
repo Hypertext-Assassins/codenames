@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import theme from './theme';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { ColorModeScript } from '@chakra-ui/react';
 
 
 ReactDOM.render(
   <Router>
+    {/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
     <Route component={App}/>
   </Router>,
   document.getElementById('root')
