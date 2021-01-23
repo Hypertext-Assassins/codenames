@@ -2,7 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import * as wordsAPI from '../services/words'
 import Card from '../components/Card'
-import { Grid, GridItem } from "@chakra-ui/react"
+import MapKey from '../components/MapKey'
+import { Grid, GridItem, Button } from "@chakra-ui/react"
 
 const Game = () => {
     const [words, setWords] = useState([]);
@@ -18,7 +19,6 @@ const Game = () => {
 
     return (  
         <>
-        <h1>Game</h1>
         {words.length ? 
             <Grid templateColumns="repeat(5, 1fr)" templateRows="repeat(5, 1fr)" gap={6}>
                 {words.map(el => 
@@ -32,8 +32,15 @@ const Game = () => {
             </Grid>
             :
             <div>Generating words... </div>
-        }       
-        <button onClick={generateWords}>Reset</button>
+        } 
+        <br></br>      
+        <Button onClick={generateWords} colorScheme="teal" variant="outline">Reset</Button>
+        <br></br>
+        <br></br>
+        <h1>Codemaster Key - should only be visible to codemasters</h1>
+        <MapKey 
+            words={words}
+        />
         </>
     );
 }
