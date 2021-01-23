@@ -68,8 +68,8 @@ const getCards = (color, number) => {
 
 
 export const shuffleBoard = () => {
-    let redCards = getCards("red", 8)
-    let blueCards = getCards("blue", 9)
+    let redCards = getCards("red.500", 8)
+    let blueCards = getCards("blue.400", 9)
     let whiteCards = getCards("white", 7)
     let blackCard = getCards("black", 1)
     let boardArr = [...redCards, ...blueCards, ...whiteCards, ...blackCard]
