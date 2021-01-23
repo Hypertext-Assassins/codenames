@@ -87,9 +87,9 @@ const getCards = (color, number) => {
 const buildBoard = () => {
     let redCards = getCards("red.500", 8)
     let blueCards = getCards("blue.400", 9) // 9 blue cards means blue must always go first
-    let whiteCards = getCards("white", 7)
+    let whtieCards = getCards("white", 7)
     let blackCard = getCards("black", 1)
-    let boardArr = [...redCards, ...blueCards, ...whiteCards, ...blackCard]
+    let boardArr = [...redCards, ...blueCards, ...whtieCards, ...blackCard]
     return boardArr;
 }
 
