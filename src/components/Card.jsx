@@ -9,16 +9,14 @@ const Card = (props) => {
 
     useEffect(()=>{
         setColor("gray.400")
+        setIsTapped(false)
     }, [props.generateWords])
 
     const tapCard = () => {
         if (!isTapped){
             setColor(props.color)
             setIsTapped(true)
-        } else {
-            setColor("gray.400")
-            setIsTapped(false)
-        }
+        } 
     }
 
     return (  

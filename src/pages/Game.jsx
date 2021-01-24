@@ -13,7 +13,6 @@ const Game = () => {
         setWords(words);
     }
 
-
     useEffect(() => {
         generateWords();
     },[]);
