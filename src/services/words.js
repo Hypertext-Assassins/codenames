@@ -75,7 +75,8 @@ const getCards = (color, number) => {
             let card = {
                 id: Number,
                 word: wordsDB[rndIdx],
-                color: color
+                color: color,
+                isTapped: false
             }
             wordObj.count--; //subtract count to avoid repeat words
             cardsArr.push(card);
