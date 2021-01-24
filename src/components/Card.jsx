@@ -4,12 +4,12 @@ import { Box, Button } from '@chakra-ui/react'
 
 const Card = (props) => {
 
-    const [color, setColor] = useState()
+    const [color, setColor] = useState("gray.400")
     const [isTapped, setIsTapped] = useState(props.isTapped)
 
     useEffect(()=>{
         setColor("gray.400")
-    }, [props.isTapped])
+    }, [props.generateWords])
 
     const tapCard = () => {
         if (!isTapped){
