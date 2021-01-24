@@ -13,6 +13,7 @@ const Game = () => {
         setWords(words);
     }
 
+
     useEffect(() => {
         generateWords();
     },[]);
@@ -28,6 +29,7 @@ const Game = () => {
                         word={el.word}
                         color={el.color}
                         isTapped={el.isTapped}
+                        generateWords={generateWords}
                         />
                 )}
             </Grid>
