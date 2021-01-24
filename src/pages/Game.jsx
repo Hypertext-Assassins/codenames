@@ -27,6 +27,7 @@ const Game = () => {
                         id={el.id}
                         word={el.word}
                         color={el.color}
+                        isTapped={el.isTapped}
                         />
                 )}
             </Grid>
