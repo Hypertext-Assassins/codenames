@@ -6,6 +6,8 @@ const Card = (props) => {
 
     const [color, setColor] = useState("gray.400")
     const [isTapped, setIsTapped] = useState(props.isTapped)
+    // const [colorCount, setColorCount] = useState({"red.500": 0, "blue.400": 0, "white": 0, "black": 0})
+    // const [redCount, setRedCount] = useState(0)
 
     useEffect(()=>{
         setColor("gray.400")
@@ -16,6 +18,14 @@ const Card = (props) => {
         if (!isTapped){
             setColor(props.color)
             setIsTapped(true)
+            // setColorCount(prevColorCount => ({
+            //     ...prevColorCount,
+            //     [props.color]: 1
+            // }))
+            // console.log(colorCount)
+            // setRedCount(redCount => redCount +1)
+            // console.log(redCount)
+            props.setColorCount(props.color);
         } 
     }
 
