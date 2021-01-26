@@ -102,8 +102,8 @@ const shuffleBoard = (boardArr) => {
         boardArr[rndIdx] = temp;
 
         //assign IDs to each word obj based on position in shuffled array
-        boardArr[i].id = i+1;
-        boardArr[rndIdx].id = rndIdx+1;
+        boardArr[i].id = i;
+        boardArr[rndIdx].id = rndIdx;
     }
     return boardArr;
 }
