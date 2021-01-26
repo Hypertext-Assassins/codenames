@@ -15,15 +15,17 @@ const Game = () => {
         const words = await wordsAPI.generateBoard();
         setWords(words);
         setScore({"red.500": 0, "blue.400": 0, "white": 0, "black": 0})
+        setWinner("")
     }
 
     useEffect(() => {
         generateWords();
     },[]);
 
-    const tapCard = (id, color) => {
+    const tapCard = async (id, color) => {
         setWords(words.map(el => el.id === id ? {...el, isTapped:true} : el))
-        setScore({...score, [color]: score[color]+1})
+        setScore(
+            {...score, [color]: score[color]+1})
         checkWin();
     }
 
