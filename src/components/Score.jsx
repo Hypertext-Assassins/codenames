@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import { Box, Spacer, Flex } from "@chakra-ui/react"
-import './Score.css';
+
 
 const Score = (props) => {
 
