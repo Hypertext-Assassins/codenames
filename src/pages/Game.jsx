@@ -9,6 +9,7 @@ import { Grid, GridItem, Button } from "@chakra-ui/react"
 const Game = () => {
     const [words, setWords] = useState([]);
     const [score, setScore] = useState({"red.500": 0, "blue.400": 0, "white": 0, "black": 0})
+    const [winner, setWinner] = useState("")
 
     const generateWords = async () => {
         const words = await wordsAPI.generateBoard();
@@ -23,12 +24,24 @@ const Game = () => {
     const tapCard = (id, color) => {
         setWords(words.map(el => el.id === id ? {...el, isTapped:true} : el))
         setScore({...score, [color]: score[color]+1})
+        checkWin();
+    }
+
+    const checkWin = () => {
+        if (score["red.500"] === 8){
+            setWinner("Red Team")
+        } else if (score["blue.400"] === 9){
+            setWinner("Blue Team")
+        } else if (score.black === 1){
+            setWinner("set winner based on which team clicked, after websockets")
+        }
     }
 
     return (  
         <>
         <Score 
             score={score}
+            winner={winner}
         />
     
         {words.length ? 

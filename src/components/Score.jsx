@@ -6,12 +6,16 @@ const Score = (props) => {
 
     return (  
         <>
+
         <Box className="score-board" 
             
             borderRadius="lg" 
             overflow="hidden"
             >
-        
+          <p>Score component</p>
+        { props.winner ?
+            <p>Congrats {props.winner} has won!</p>    
+        :
         <Spacer />
         <Flex>
             <Box 
@@ -44,6 +48,8 @@ const Score = (props) => {
             </Box>
             </Flex>
         </Box>
+
+        
         </>
     );
 }
