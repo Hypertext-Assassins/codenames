@@ -18,6 +18,7 @@ const Game = () => {
     const [winner, setWinner] = useState("")
     // const [timestamp, setTimestamp] = useState("no timestamp yet")
     const [state, setState] = useState("")
+    const [test, setTest] = useState("")
 
     const generateWords = async () => {
         const words = await wordsAPI.generateBoard();
@@ -51,6 +52,15 @@ const Game = () => {
         setState(word)
     })
 
+    const testButton = () => {
+        socket.emit("helloworld", "testing")
+    }
+
+    socket.on("helloworld", data => {
+        console.log("helloworld testing app")
+        setTest(data)
+    })
+
 
     const checkWin = () => {
         if (score["red.500"] === 8){
@@ -70,6 +80,8 @@ const Game = () => {
             score={score}
             winner={winner}
         />
+        <p>testing some stuff: {test}</p>
+        <Button onClick={testButton}>test</Button>
     
         {words.length ? 
             <Grid templateColumns="repeat(5, 1fr)" templateRows="repeat(5, 1fr)" gap={6}>

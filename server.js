@@ -37,6 +37,11 @@ io.on('connection', (socket) => {
       console.log(arg)
       socket.emit("tappedCard", arg)
   })
+
+  socket.on("helloworld", function(msg){
+      console.log("helloworld testing server.js")
+      io.emit("helloworld", msg)
+  })
 });
 
 // io.on('connection', (client) => {
