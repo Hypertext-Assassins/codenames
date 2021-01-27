@@ -19,9 +19,11 @@ const Game = () => {
     // const [timestamp, setTimestamp] = useState("no timestamp yet")
     const [state, setState] = useState("")
     const [test, setTest] = useState("")
+    const [players, setPlayers] = useState([])
 
     const generateWords = async () => {
         const words = await wordsAPI.generateBoard();
+        // socket.emit("generate words", words)
         setWords(words);
         setScore({"red.500": 0, "blue.400": 0, "white": 0, "black": 0})
         setWinner("")
@@ -43,8 +45,6 @@ const Game = () => {
         //     setState(data)
         // })
         socket.emit("tappedCard", word)
-        
-
     }
 
     socket.on("tappedCard", word => {
@@ -60,6 +60,15 @@ const Game = () => {
         console.log("helloworld testing app")
         setTest(data)
     })
+
+    // socket.on("generate words", words => {
+    //     setWords(words)
+    // })
+
+    socket.on("game join room", (roomId) => {
+        console.log(`game app ${socket.id} has joined ${roomId}`)
+        setPlayers([...players, socket.id])
+    })    
 
 
     const checkWin = () => {
@@ -82,6 +91,14 @@ const Game = () => {
         />
         <p>testing some stuff: {test}</p>
         <Button onClick={testButton}>test</Button>
+
+        {players.length ? 
+            players.map(player =>
+            <p>player</p>
+            )
+            :
+            <></>
+        }
     
         {words.length ? 
             <Grid templateColumns="repeat(5, 1fr)" templateRows="repeat(5, 1fr)" gap={6}>

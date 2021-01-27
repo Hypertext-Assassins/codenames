@@ -32,10 +32,10 @@ function App() {
           <Button onClick={toggleTheme}>Toggle Theme</Button>
         </>
         <Route exact path="/" render={({history}) =>
-          <LandingPage/>
+          <LandingPage history={history}/>
         }/>
         <Route exact path="/game" render={({history}) =>
-          <Game />
+          <Game history={history}/>
         }/>
         <br></br>
         

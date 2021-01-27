@@ -4,9 +4,10 @@ import {Link} from 'react-router-dom'
 import io from 'socket.io-client'
 const socket = io('http://localhost:4000')
 
-const LandingPage = () => {
+const LandingPage = (props) => {
 
     const [state, setState] = useState("")
+    const [roomId, setRoomId] = useState("")
 
     useEffect(() => {
         // socket.on('connect', () => {
@@ -18,9 +19,27 @@ const LandingPage = () => {
         })
     }, [])
 
+    const handleChange = (e) => {
+        setRoomId(e.target.value)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(roomId)
+        socket.emit("join room", roomId)
+        props.history.push("/game")  //wrapping components from app.js with Route from react-router-dom provides a history prop
+    }
+
+    socket.on("landing join room", (roomId) => {
+        console.log(`landing pg app ${socket.id} has joined ${roomId}`)
+        // setPlayers([...players, socket.id])
+    })  
+
     return (  
         <>
-        <p>If socket.io works, this state should say something: {state}</p>
+        <form onSubmit={handleSubmit}>
+            <input onChange={handleChange}></input>
+            <button type="submit">Enter Room</button>
+        </form>
         <h1>Codenames Landing Page</h1>
         <button><Link exact to="/game">Play Codenames</Link></button>
         </>
