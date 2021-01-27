@@ -5,13 +5,15 @@ import Score from '../components/Score'
 import Card from '../components/Card'
 import MapKey from '../components/MapKey'
 import { Grid, GridItem, Button } from "@chakra-ui/react"
-// import {subscribeToTimer} from '../services/socketapi'
+import {subscribeToTimer} from '../services/socketapi'
+
+
 
 const Game = () => {
     const [words, setWords] = useState([]);
     const [score, setScore] = useState({"red.500": 0, "blue.400": 0, "white": 0, "black": 0})
     const [winner, setWinner] = useState("")
-    // const [timestamp, setTimestamp] = useState({timestamp: ""})
+    // const [timestamp, setTimestamp] = useState("no timestamp yet")
 
     const generateWords = async () => {
         const words = await wordsAPI.generateBoard();
@@ -28,7 +30,7 @@ const Game = () => {
         setWords(words.map(el => el.id === id ? {...el, isTapped:true} : el))
         setScore({...score, [color]: score[color]+1})
         checkWin();
-        // subscribeToTimer((err, timestamp) => setTimestamp({timestamp:timestamp}))
+        // subscribeToTimer(1000, (err, timestamp) => setTimestamp(timestamp))
     }
 
     const checkWin = () => {
@@ -43,7 +45,7 @@ const Game = () => {
 
     return (  
         <>
-        
+        {/* <p>this is a timer: {timestamp}</p> */}
         <Score 
             score={score}
             winner={winner}

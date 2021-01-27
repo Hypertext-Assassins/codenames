@@ -31,8 +31,17 @@ const io = require("socket.io")(http, {
   });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log(`${socket.id} has connected`);
 });
+
+// io.on('connection', (client) => {
+//     client.on('subscribeToTimer', (interval) => {
+//       console.log('client is subscribing to timer with interval ', interval);
+//       setInterval(() => {
+//         client.emit('timer', new Date());
+//       }, interval);
+//     });
+//   });
 
 http.listen(4000, function() {
   console.log("listening on *:4000");
