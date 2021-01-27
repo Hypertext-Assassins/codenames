@@ -32,6 +32,11 @@ const io = require("socket.io")(http, {
 
 io.on('connection', (socket) => {
   console.log(`${socket.id} has connected`);
+  socket.emit("hello", "world")
+  socket.on("tappedCard", (arg) => {
+      console.log(arg)
+      socket.emit("tappedCard", arg)
+  })
 });
 
 // io.on('connection', (client) => {

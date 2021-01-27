@@ -9,15 +9,18 @@ const LandingPage = () => {
     const [state, setState] = useState("")
 
     useEffect(() => {
-        socket.on('connect', () => {
-            console.log(`${socket.id} has connected`)
-            setState("SOCKET IO WORKS FOR TEH LANDING PG")
+        // socket.on('connect', () => {
+        //     console.log(`${socket.id} has connected`)
+        //     setState("SOCKET IO WORKS FOR THE LANDING PG")
+        // })
+        socket.on("hello", (arg) => {
+            console.log(arg)
         })
     }, [])
 
     return (  
         <>
-        <p>hello this is the {state}</p>
+        <p>If socket.io works, this state should say something: {state}</p>
         <h1>Codenames Landing Page</h1>
         <button><Link exact to="/game">Play Codenames</Link></button>
         </>

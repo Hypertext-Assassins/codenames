@@ -29,7 +29,7 @@ const Card = (props) => {
     // }
 
     const handleClick = () => {
-        props.tapCard(props.id, props.color);
+        props.tapCard(props.id, props.color, props.word);
     }
 
     return (  

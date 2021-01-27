@@ -5,8 +5,11 @@ import Score from '../components/Score'
 import Card from '../components/Card'
 import MapKey from '../components/MapKey'
 import { Grid, GridItem, Button } from "@chakra-ui/react"
-import {subscribeToTimer} from '../services/socketapi'
+// import {subscribeToTimer} from '../services/socketapi'
 
+import {fromSocketAPI} from '../services/socketapi'
+import io from 'socket.io-client'
+const socket = io('http://localhost:4000')
 
 
 const Game = () => {
@@ -14,6 +17,7 @@ const Game = () => {
     const [score, setScore] = useState({"red.500": 0, "blue.400": 0, "white": 0, "black": 0})
     const [winner, setWinner] = useState("")
     // const [timestamp, setTimestamp] = useState("no timestamp yet")
+    const [state, setState] = useState("")
 
     const generateWords = async () => {
         const words = await wordsAPI.generateBoard();
@@ -26,12 +30,27 @@ const Game = () => {
         generateWords();
     },[]);
 
-    const tapCard = async (id, color) => {
+    const tapCard = async (id, color, word) => {
         setWords(words.map(el => el.id === id ? {...el, isTapped:true} : el))
         setScore({...score, [color]: score[color]+1})
         checkWin();
         // subscribeToTimer(1000, (err, timestamp) => setTimestamp(timestamp))
+        // socket.emit("tappedCard", word)
+        // fromSocketAPI(word);
+        // socket.on("card tapped", data => {
+        //     console.log("card tapped")
+        //     setState(data)
+        // })
+        socket.emit("tappedCard", word)
+        
+
     }
+
+    socket.on("tappedCard", word => {
+        console.log(`${word} has been tapped`)
+        setState(word)
+    })
+
 
     const checkWin = () => {
         if (score["red.500"] === 8){
@@ -46,6 +65,7 @@ const Game = () => {
     return (  
         <>
         {/* <p>this is a timer: {timestamp}</p> */}
+        <p>here is some state: {state}</p>
         <Score 
             score={score}
             winner={winner}
